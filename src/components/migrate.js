@@ -146,241 +146,246 @@ export class Migrate extends Component {
     }
 
     return (
-      <section className='pb-0' id='cta'>
-        <div className='container' data-aos='zoom-in'>
-          <div className='row'>
-            <div className='col-lg-9 text-center text-lg-left'>
-              <h3>Migrate to HODL 2.0</h3>
+      <div className='container mb-5'>
+        <section className='pb-0 rounded-lg' id='cta'>
+          <div className='container' data-aos='zoom-in'>
+            <div className='row'>
+              <div className='col-lg-9 text-center text-lg-left'>
+                <h3 className='ml-md-4'>Migrate to HODL 2.0</h3>
+              </div>
+              <div className='col-lg-3 cta-btn-container text-center'>
+                {!connected && (
+                  <a
+                    className='cta-btn align-middle'
+                    href='#'
+                    data-toggle='modal'
+                    data-target='#exampleModalCenter'
+                  >
+                    Connet wallet
+                  </a>
+                )}
+                {connected && (
+                  <>
+                    <div>
+                      {' '}
+                      <a
+                        className='cta-btn align-middle'
+                        href='#'
+                        data-toggle='modal'
+                        data-target='#swapModal'
+                      >
+                        Swap Now
+                      </a>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-            <div className='col-lg-3 cta-btn-container text-center'>
-              {!connected && (
-                <a
-                  className='cta-btn align-middle'
-                  href='#'
-                  data-toggle='modal'
-                  data-target='#exampleModalCenter'
-                >
-                  Connet wallet
-                </a>
-              )}
+            <div className='col-md-10 mx-auto mt-5 mb-2'>
+              {!connected && ''}
               {connected && (
-                <>
-                  <div>
-                    {' '}
-                    <a
-                      className='cta-btn align-middle'
-                      href='#'
-                      data-toggle='modal'
-                      data-target='#swapModal'
+                <div className='row justify-content-between'>
+                  <h6 style={{ color: 'white' }}>Wallet Addrress: 0X0..988A</h6>
+
+                  <h6 style={{ color: 'white' }}>HODL 1.0 Balance: 10281</h6>
+
+                  <h6 style={{ color: 'white' }}>
+                    HODL 2.0 Balance: {this.state.hodl1balance}
+                  </h6>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div
+            className='modal fade'
+            id='exampleModalCenter'
+            tabindex='-1'
+            role='dialog'
+            aria-labelledby='exampleModalCenterTitle'
+            aria-hidden='true'
+          >
+            <div
+              className='modal-dialog modal-dialog-centered modal-connect'
+              role='document'
+            >
+              <div className='modal-content modal-content-custom'>
+                <div className='modal-body connect-body text-center'>
+                  <div class='connect-header'>
+                    <div class='connect-flex connect-header-title'>
+                      <h5
+                        color='text'
+                        class='sc-gtsrHT sc-bCwfaz itNBpW kcUtoS'
+                      >
+                        Connect to a wallet
+                      </h5>
+                    </div>
+                    <button
+                      data-dismiss='modal'
+                      class='sc-hKFxyN  sc-eCApnc connect-label-btn fAYopv'
+                      aria-label='Close the dialog'
+                      scale='md'
                     >
-                      Swap Now
+                      <svg
+                        viewBox='0 0 24 24'
+                        color='primary'
+                        width='20px'
+                        xmlns='http://www.w3.org/2000/svg'
+                        class='sc-bdnxRM connect-close-btn'
+                      >
+                        <path d='M18.3 5.70997C17.91 5.31997 17.28 5.31997 16.89 5.70997L12 10.59L7.10997 5.69997C6.71997 5.30997 6.08997 5.30997 5.69997 5.69997C5.30997 6.08997 5.30997 6.71997 5.69997 7.10997L10.59 12L5.69997 16.89C5.30997 17.28 5.30997 17.91 5.69997 18.3C6.08997 18.69 6.71997 18.69 7.10997 18.3L12 13.41L16.89 18.3C17.28 18.69 17.91 18.69 18.3 18.3C18.69 17.91 18.69 17.28 18.3 16.89L13.41 12L18.3 7.10997C18.68 6.72997 18.68 6.08997 18.3 5.70997Z'></path>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div className='connect-pad-list connect-pad-list-top connect-flex connect-list-direction'>
+                    <a onClick={this.requestAuth} class='link-effect'>
+                      <button
+                        class='connect-list-btn connect-wallet-label'
+                        width='100%'
+                        id='wallet-connect-metamask'
+                        scale='md'
+                      >
+                        <div color='primary' class='sc-gtsrHT bGLBCp'>
+                          Metamask
+                        </div>
+                        <img class='connect_wallet_img' src={Metamask} />
+                      </button>
                     </a>
                   </div>
-                </>
-              )}
-            </div>
-          </div>
-          <div className='col-md-10 mx-auto mt-5 mb-2'>
-            {!connected && ''}
-            {connected && (
-              <div className='row justify-content-between'>
-                <h6 style={{ color: 'white' }}>Wallet Addrress: 0X0..988A</h6>
 
-                <h6 style={{ color: 'white' }}>HODL 1.0 Balance: 10281</h6>
-
-                <h6 style={{ color: 'white' }}>
-                  HODL 2.0 Balance: {this.state.hodl1balance}
-                </h6>
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div
-          className='modal fade'
-          id='exampleModalCenter'
-          tabindex='-1'
-          role='dialog'
-          aria-labelledby='exampleModalCenterTitle'
-          aria-hidden='true'
-        >
-          <div
-            className='modal-dialog modal-dialog-centered modal-connect'
-            role='document'
-          >
-            <div className='modal-content modal-content-custom'>
-              <div className='modal-body connect-body text-center'>
-                <div class='connect-header'>
-                  <div class='connect-flex connect-header-title'>
-                    <h5 color='text' class='sc-gtsrHT sc-bCwfaz itNBpW kcUtoS'>
-                      Connect to a wallet
-                    </h5>
+                  <div className='connect-pad-list connect-flex connect-list-direction'>
+                    <a onClick={this.requestAuth} class='link-effect'>
+                      <button
+                        class='connect-list-btn connect-wallet-label'
+                        width='100%'
+                        id='wallet-connect-metamask'
+                        scale='md'
+                      >
+                        <div color='primary' class='sc-gtsrHT bGLBCp'>
+                          Trust Wallet
+                        </div>
+                        <img class='connect_wallet_img' src={TrustWallet} />
+                      </button>
+                    </a>
                   </div>
-                  <button
-                    data-dismiss='modal'
-                    class='sc-hKFxyN  sc-eCApnc connect-label-btn fAYopv'
-                    aria-label='Close the dialog'
-                    scale='md'
-                  >
-                    <svg
-                      viewBox='0 0 24 24'
-                      color='primary'
-                      width='20px'
-                      xmlns='http://www.w3.org/2000/svg'
-                      class='sc-bdnxRM connect-close-btn'
-                    >
-                      <path d='M18.3 5.70997C17.91 5.31997 17.28 5.31997 16.89 5.70997L12 10.59L7.10997 5.69997C6.71997 5.30997 6.08997 5.30997 5.69997 5.69997C5.30997 6.08997 5.30997 6.71997 5.69997 7.10997L10.59 12L5.69997 16.89C5.30997 17.28 5.30997 17.91 5.69997 18.3C6.08997 18.69 6.71997 18.69 7.10997 18.3L12 13.41L16.89 18.3C17.28 18.69 17.91 18.69 18.3 18.3C18.69 17.91 18.69 17.28 18.3 16.89L13.41 12L18.3 7.10997C18.68 6.72997 18.68 6.08997 18.3 5.70997Z'></path>
-                    </svg>
-                  </button>
-                </div>
 
-                <div className='connect-pad-list connect-pad-list-top connect-flex connect-list-direction'>
-                  <a onClick={this.requestAuth} class='link-effect'>
-                    <button
-                      class='connect-list-btn connect-wallet-label'
-                      width='100%'
-                      id='wallet-connect-metamask'
-                      scale='md'
-                    >
-                      <div color='primary' class='sc-gtsrHT bGLBCp'>
-                        Metamask
-                      </div>
-                      <img class='connect_wallet_img' src={Metamask} />
-                    </button>
-                  </a>
-                </div>
-
-                <div className='connect-pad-list connect-flex connect-list-direction'>
-                  <a onClick={this.requestAuth} class='link-effect'>
-                    <button
-                      class='connect-list-btn connect-wallet-label'
-                      width='100%'
-                      id='wallet-connect-metamask'
-                      scale='md'
-                    >
-                      <div color='primary' class='sc-gtsrHT bGLBCp'>
-                        Trust Wallet
-                      </div>
-                      <img class='connect_wallet_img' src={TrustWallet} />
-                    </button>
-                  </a>
-                </div>
-
-                <div className='connect-pad-list connect-flex connect-list-direction'>
-                  <a onClick={this.requestAuth} class='link-effect'>
-                    <button
-                      class='connect-list-btn connect-wallet-label'
-                      width='100%'
-                      id='wallet-connect-metamask'
-                      scale='md'
-                    >
-                      <div color='primary' class='sc-gtsrHT bGLBCp'>
-                        SafePal Wallet
-                      </div>
-                      <img class='connect_wallet_img' src={Safepal} />
-                    </button>
-                  </a>
-                </div>
-                <div className='connect-pad-list  connect-flex connect-list-direction'>
-                  <a onClick={this.requestAuth} class='link-effect'>
-                    <button
-                      class='connect-list-btn connect-wallet-label'
-                      width='100%'
-                      id='wallet-connect-metamask'
-                      scale='md'
-                    >
-                      <div color='primary' class='sc-gtsrHT bGLBCp'>
-                        TokenPocket Wallet
-                      </div>
-                      <img class='connect_wallet_img' src={TP} />
-                    </button>
-                  </a>
-                </div>
-                <div className='connect-pad-list  connect-flex connect-list-direction'>
-                  <a onClick={this.requestAuth} class='link-effect'>
-                    <button
-                      class='connect-list-btn connect-wallet-label'
-                      width='100%'
-                      id='wallet-connect-metamask'
-                      scale='md'
-                    >
-                      <div color='primary' class='sc-gtsrHT bGLBCp'>
-                        Math Wallet
-                      </div>
-                      <img class='connect_wallet_img' src={MW} />
-                    </button>
-                  </a>
-                </div>
-                <div className='connect-pad-list  connect-flex connect-list-direction'>
-                  <a onClick={this.requestAuthBSC} class='link-effect'>
-                    <button
-                      class='connect-list-btn connect-wallet-label'
-                      width='100%'
-                      id='wallet-connect-metamask'
-                      scale='md'
-                    >
-                      <div color='primary' class='sc-gtsrHT bGLBCp'>
-                        Binance Chain Wallet
-                      </div>
-                      <img class='connect_wallet_img' src={BCW} />
-                    </button>
-                  </a>
-                </div>
-                <div className='connect-pad-list connect-pad-list-bottom connect-flex connect-list-direction'>
-                  <a onClick={this.walletconnect} class='link-effect'>
-                    <button
-                      class='connect-list-btn connect-wallet-label'
-                      width='100%'
-                      id='wallet-connect-metamask'
-                      scale='md'
-                    >
-                      <div color='primary' class='sc-gtsrHT bGLBCp'>
-                        Wallet Connect
-                      </div>
-                      <img class='connect_wallet_img' src={WC} />
-                    </button>
-                  </a>
+                  <div className='connect-pad-list connect-flex connect-list-direction'>
+                    <a onClick={this.requestAuth} class='link-effect'>
+                      <button
+                        class='connect-list-btn connect-wallet-label'
+                        width='100%'
+                        id='wallet-connect-metamask'
+                        scale='md'
+                      >
+                        <div color='primary' class='sc-gtsrHT bGLBCp'>
+                          SafePal Wallet
+                        </div>
+                        <img class='connect_wallet_img' src={Safepal} />
+                      </button>
+                    </a>
+                  </div>
+                  <div className='connect-pad-list  connect-flex connect-list-direction'>
+                    <a onClick={this.requestAuth} class='link-effect'>
+                      <button
+                        class='connect-list-btn connect-wallet-label'
+                        width='100%'
+                        id='wallet-connect-metamask'
+                        scale='md'
+                      >
+                        <div color='primary' class='sc-gtsrHT bGLBCp'>
+                          TokenPocket Wallet
+                        </div>
+                        <img class='connect_wallet_img' src={TP} />
+                      </button>
+                    </a>
+                  </div>
+                  <div className='connect-pad-list  connect-flex connect-list-direction'>
+                    <a onClick={this.requestAuth} class='link-effect'>
+                      <button
+                        class='connect-list-btn connect-wallet-label'
+                        width='100%'
+                        id='wallet-connect-metamask'
+                        scale='md'
+                      >
+                        <div color='primary' class='sc-gtsrHT bGLBCp'>
+                          Math Wallet
+                        </div>
+                        <img class='connect_wallet_img' src={MW} />
+                      </button>
+                    </a>
+                  </div>
+                  <div className='connect-pad-list  connect-flex connect-list-direction'>
+                    <a onClick={this.requestAuthBSC} class='link-effect'>
+                      <button
+                        class='connect-list-btn connect-wallet-label'
+                        width='100%'
+                        id='wallet-connect-metamask'
+                        scale='md'
+                      >
+                        <div color='primary' class='sc-gtsrHT bGLBCp'>
+                          Binance Chain Wallet
+                        </div>
+                        <img class='connect_wallet_img' src={BCW} />
+                      </button>
+                    </a>
+                  </div>
+                  <div className='connect-pad-list connect-pad-list-bottom connect-flex connect-list-direction'>
+                    <a onClick={this.walletconnect} class='link-effect'>
+                      <button
+                        class='connect-list-btn connect-wallet-label'
+                        width='100%'
+                        id='wallet-connect-metamask'
+                        scale='md'
+                      >
+                        <div color='primary' class='sc-gtsrHT bGLBCp'>
+                          Wallet Connect
+                        </div>
+                        <img class='connect_wallet_img' src={WC} />
+                      </button>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div
-          className='modal fade'
-          id='swapModal'
-          tabindex='3'
-          role='dialog'
-          aria-labelledby='swapModalTitle'
-          aria-hidden='true'
-        >
           <div
-            className='modal-dialog modal-dialog-centered modal-connect'
-            role='document'
+            className='modal fade'
+            id='swapModal'
+            tabindex='3'
+            role='dialog'
+            aria-labelledby='swapModalTitle'
+            aria-hidden='true'
           >
-            <div className='modal-content modal-content-custom'>
-              <div className='modal-body connect-body text-center'>
-                <h5 className='text-primary mb-4'>
-                  You Have Successfully Migrated
-                </h5>
-                <div>
-                  <h6 className='mb-0'>128518 HODL 1.0</h6>
-                  <h6 className='my-4'>To</h6>
-                  <h6>128518 HODL 2.0</h6>
+            <div
+              className='modal-dialog modal-dialog-centered modal-connect'
+              role='document'
+            >
+              <div className='modal-content modal-content-custom'>
+                <div className='modal-body connect-body text-center'>
+                  <h5 className='text-primary mb-4'>
+                    You Have Successfully Migrated
+                  </h5>
                   <div>
-                    <img
-                      height='60px'
-                      className='d-block mx-auto'
-                      src={HeroImage}
-                      alt='...'
-                    ></img>
+                    <h6 className='mb-0'>128518 HODL 1.0</h6>
+                    <h6 className='my-4'>To</h6>
+                    <h6>128518 HODL 2.0</h6>
+                    <div>
+                      <img
+                        height='60px'
+                        className='d-block mx-auto'
+                        src={HeroImage}
+                        alt='...'
+                      ></img>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     );
   }
 }

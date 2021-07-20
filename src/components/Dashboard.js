@@ -8,6 +8,7 @@ import HeroImage from '../images/hero-img.png';
 import Icon3 from '../images/icons/3.png';
 import Icon8 from '../images/icons/8.png';
 import Icon1 from '../images/icons/1.png';
+import Icon5 from '../images/icons/12.png';
 import Icon2 from '../images/icons/2.png';
 import Icon11 from '../images/icons/11.png';
 import Icon4 from '../images/icons/4.png';
@@ -1225,10 +1226,15 @@ function Dashboard() {
                 data-aos-delay='300'
               >
                 <div className='icon-box'>
-                  {/* <div className='icon'>
-                    <img src={Icon3} alt='...' />
-                  </div> */}
-                  <h5>My Collectable Rewards</h5>
+                  <div className='mb-2'>
+                    <img
+                      height={50}
+                      className='d-block mx-auto'
+                      src={Icon5}
+                      alt='...'
+                    />
+                  </div>
+                  <h6>My Collectable Rewards</h6>
                   {/* <p>
                     $HODL {new Intl.NumberFormat().format(maxTransactionAmount)}{' '}
                   </p> */}
@@ -1240,10 +1246,15 @@ function Dashboard() {
                 data-aos-delay='300'
               >
                 <div className='icon-box'>
-                  {/* <div className='icon'>
-                    <img src={Icon3} alt='...' />
-                  </div> */}
-                  <h5>Next Collection Date</h5>
+                  <div className='mb-2'>
+                    <img
+                      height={50}
+                      className='d-block mx-auto'
+                      src={Icon5}
+                      alt='...'
+                    />
+                  </div>
+                  <h6>Next Collection Date</h6>
                   {/* <p>
                     $HODL {new Intl.NumberFormat().format(maxTransactionAmount)}{' '}
                   </p> */}
@@ -1255,10 +1266,15 @@ function Dashboard() {
                 data-aos-delay='300'
               >
                 <div className='icon-box'>
-                  {/* <div className='icon'>
-                    <img src={Icon3} alt='...' />
-                  </div> */}
-                  <h5>BNB Collected Till Date on 2.0</h5>
+                  <div className='mb-2'>
+                    <img
+                      height={50}
+                      className='d-block mx-auto'
+                      src={Icon5}
+                      alt='...'
+                    />
+                  </div>
+                  <h6>BNB Collected Till Date on 2.0</h6>
                   {/* <p>
                     $HODL {new Intl.NumberFormat().format(maxTransactionAmount)}{' '}
                   </p> */}
@@ -1270,10 +1286,15 @@ function Dashboard() {
                 data-aos-delay='300'
               >
                 <div className='icon-box'>
-                  {/* <div className='icon'>
-                    <img src={Icon3} alt='...' />
-                  </div> */}
-                  <h5>HODL Re-Invested Till Date on 2.0</h5>
+                  <div className='mb-2'>
+                    <img
+                      height={50}
+                      className='d-block mx-auto'
+                      src={Icon5}
+                      alt='...'
+                    />
+                  </div>
+                  <h6>HODL Re-Invested Till Date on 2.0</h6>
                   {/* <p>
                     $HODL {new Intl.NumberFormat().format(maxTransactionAmount)}{' '}
                   </p> */}
@@ -1285,10 +1306,15 @@ function Dashboard() {
                 data-aos-delay='300'
               >
                 <div className='icon-box'>
-                  {/* <div className='icon'>
-                    <img src={Icon3} alt='...' />
-                  </div> */}
-                  <h5>Your HODL Balance</h5>
+                  <div className='mb-2'>
+                    <img
+                      height={50}
+                      className='d-block mx-auto'
+                      src={Icon5}
+                      alt='...'
+                    />
+                  </div>
+                  <h6>Your HODL Balance</h6>
                   {/* <p>
                     $HODL {new Intl.NumberFormat().format(maxTransactionAmount)}{' '}
                   </p> */}
