@@ -1,0 +1,303 @@
+:root {
+  --wheel-font: 'Lato', 'Quicksand', sans-serif;
+  --wheel-size: 300px;
+  --wheel-slice-spacing: 50px;
+  --wheel-border-size: 5px;
+  --wheel-color: #2092b9e6;
+  
+   /*--wheel-color: #a57785;*/
+  --neutral-color: white;
+  --PI: 3.14159265358979;
+  --nb-item: 0;
+  --item-nb: 0;
+  --selected-item: 0;
+  --nb-turn: 5;
+  --spinning-duration: 7s;
+  --reset-duration: 1s;
+}
+
+
+/* Conteneur de la roue = cercle rose extérieur */
+.wheel-container {
+  display: block;
+  position: relative;
+  box-sizing: content-box;
+  width: calc(var(--wheel-size) + 2 * var(--wheel-border-size));
+  height: calc(var(--wheel-size) + 2 * var(--wheel-border-size));
+  padding: 3px;
+  margin: auto;
+  background-color: var(--neutral-color);
+  border: solid var(--wheel-color) 3px;
+  border-radius: 50%;
+  user-select: none;
+}
+
+/* Triangle de sélection = 1 rose +  1 blanc */
+.wheel-container::before,
+.wheel-container::after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 0;
+  width: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  border: solid transparent 20px;
+  border-left-width: 0;
+}
+
+.wheel-container::before {
+  right: 0px;
+  border-right-color: var(--wheel-color);
+}
+
+.wheel-container::after {
+  right: -5px;
+  border-right-color: var(--neutral-color);
+}
+
+/* Roue */
+.wheel {
+  display: block;
+  position: relative;
+  box-sizing: content-box;
+  margin: auto;
+  width: var(--wheel-size);
+  height: var(--wheel-size);
+  overflow: hidden;
+  border-radius: 50%;
+  border: solid var(--wheel-color) var(--wheel-border-size);
+  background-color: var(--wheel-color);
+  transition: transform var(--reset-duration);
+  transform: rotate(0deg);
+  cursor: pointer;
+}
+
+.wheel.spinning {
+  transition: transform var(--spinning-duration);
+  transform: rotate(calc(var(--nb-turn) * 360deg + (-360deg * var(--selected-item) / var(--nb-item, 1))));
+}
+
+/* Centre de la roue = rond blanc au centre */
+.wheel::after {
+  display: block;
+  position: absolute;
+  content: '';
+  background-color: var(--neutral-color);
+  width: 25px;
+  height: 25px;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+/* Element sur la roue */
+.wheel-item {
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+
+  /* position de l'item */
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform-origin: center left;
+  transform: translateY(-50%) rotate(calc(var(--item-nb) * (360deg / var(--nb-item, 1))));
+
+  /* texte */
+  color: var(--neutral-color);
+  text-align: right;
+  padding: 0 25px 0 50px;
+  font-family: var(--wheel-font);
+}
+
+/* Background de l'élément = triangle rose plus clair */
+.wheel-item:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-left: 0px;
+  opacity: 0.25;
+
+  /* 
+    Largeur du triangle
+    Je ne sais pas pourquoi j'ai besoin d'ajouter 
+      " + var(--wheel-size) / 2 " dans slice-max-width  ==> donne 2.PI.R + R
+    mais globalement ca marche a peu près bien 
+    TODO: A étudier 
+  */
+  --slice-max-width: calc(var(--PI) * var(--wheel-size) + var(--wheel-size) / 2);
+  --slice-width: calc((var(--slice-max-width) / var(--nb-item)) - var(--wheel-slice-spacing));
+  border: solid transparent calc(var(--slice-width) / 2);
+  border-left: solid transparent 0;
+  /* profondeur du triangle = du centre de la roue à la bordure = 300px / 2 */
+  border-right: solid var(--neutral-color) calc(var(--wheel-size) / 2);
+}
+
+.btn-spin{
+  width: 120px;
+  height: 120px;
+  vertical-align: middle;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-top: -100px;
+  margin-right: 60px;
+  background-image: linear-gradient(
+    90deg
+    , #3e7fb3, #3dbebf 51%, #3dbebf);
+        color: #fff;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+
+}
+
+.btn-min{
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  position: absolute;
+  right: 190px;
+  bottom: 0px;
+  background-image: linear-gradient(
+    90deg
+    , #3e7fb3, #3dbebf 51%, #3dbebf);
+        color: #fff;
+  /* background: linear-gradient(to top right, #057bbf 0%, #1613db 100%) !important; */
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.btn-max{
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  position: absolute;
+  right: 65px;
+  top: -90px;
+  background-image: linear-gradient(
+    90deg
+    , #3e7fb3, #3dbebf 51%, #3dbebf);
+        color: #fff;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.div-wheel{
+  width: 100%;
+}
+
+.btn-div{
+  position: relative
+}
+
+.wheel-bg-main{
+  background: #8b1394 !important;
+}
+
+.btn-claimed{
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(
+    90deg
+    , #3e7fb3, #3dbebf 51%, #3dbebf);
+        color: #fff;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.claimed-div{
+position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+}
+
+
+.textbox-wheel{
+  width: auto;
+  float: right;
+  margin-top: 26px;
+}
+/* .textbox-wheel{
+margin-left: 10px
+} */
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 768px){
+
+.btn-primary{
+  margin-left: 0px;
+  position: initial;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  display: inline-block;
+  margin-top: 0px;
+  margin-right: 5px;
+}
+
+.claimed-div {
+  position: inherit;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+}
+
+
+#wheel{
+  padding-left: 21%;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 768px){  
+
+  #wheel{
+    padding-left: 0%;
+  }
+
+  #canvas{
+    width: 550px;
+    height: 630px;
+  }
+
+}
+
+
+.dropdown-wheel{
+  width: auto;
+  float: left;
+}
+
+.wheel-btn-right{
+  width: auto;
+  float: right;
+}

@@ -28,21 +28,21 @@ export class Dapp extends Component {
 
   componentDidMount() { 
 
-    //  const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
+     const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
 
       let address = window.sessionStorage.getItem("walletAddress");
     //   const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
       
-      const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
+    //   const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
   
         var contractABI = LMabi;
-        var contractAddress ="0x0e3eaf83ea93abe756690c62c72284943b96a6bc";
+        var contractAddress ="0x013d86edcE7faF296142E26C622AA79874F6Ee0C";
         var contract = new web3.eth.Contract(contractABI,contractAddress);
    
      if (address){
          
           // get BNB balance of reward POOl  
-       web3.eth.getBalance("0x0e3eaf83ea93abe756690c62c72284943b96a6bc")
+       web3.eth.getBalance("0x013d86edcE7faF296142E26C622AA79874F6Ee0C")
        .then(balance => {
            //console.log(balance);
            var tokens = web3.utils.toBN(balance).toString();

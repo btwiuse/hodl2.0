@@ -17,6 +17,9 @@ import WC from '../images/wc.png';
 
 import WalletConnectProvider from '@walletconnect/web3-provider';
 
+import swalreact from '@sweetalert/with-react';
+import swal from 'sweetalert';
+
 export class Migrate extends Component {
   constructor(props) {
     super(props);
@@ -25,23 +28,28 @@ export class Migrate extends Component {
       wallet: '',
       address: '',
       hodl1balance: 0,
+      hodl2balance: 0,
     };
   }
 
   componentDidMount() {
-    //  const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
+     const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
 
     let address = window.sessionStorage.getItem('walletAddress');
     //   const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
 
-    const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
+    // const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
 
     var contractABI = LMabi;
-    var contractAddress = '0x0e3eaf83ea93abe756690c62c72284943b96a6bc';
+    var contractAddress = '0x0E374fCa4310F99d026a803a9adcf9139684e698';
     var contract = new web3.eth.Contract(contractABI, contractAddress);
 
+    var contractAddress2 = '0x013d86edcE7faF296142E26C622AA79874F6Ee0C';
+    var contract2 = new web3.eth.Contract(contractABI, contractAddress2);
+
+
     if (address) {
-      // HODL BALANCE user
+      // HODL1 BALANCE user
       contract.methods
         .balanceOf(address)
         .call()
@@ -49,10 +57,109 @@ export class Migrate extends Component {
           ////console.log(balance);
           var gwei = web3.utils.toBN(balance).toString();
           var tokens = web3.utils.toWei(gwei, 'Gwei');
-          this.setState({ hodl1balance: web3.utils.fromWei(tokens, 'ether') });
+          this.setState({ hodl1balance: Number(web3.utils.fromWei(tokens, 'ether')) });
         });
+    
+      // HODL2 BALANCE user
+      contract2.methods
+        .balanceOf(address)
+        .call()
+        .then((balance) => {
+          ////console.log(balance);
+          var gwei = web3.utils.toBN(balance).toString();
+          var tokens = web3.utils.toWei(gwei, 'Gwei');
+          this.setState({ hodl2balance: Number(web3.utils.fromWei(tokens, 'ether')) });
+        });
+
+
+
     }
   }
+
+
+ swap = async () => {
+ 
+  console.log("Swap Hodl called");
+  const web3 = await contractService.getWeb3Client();
+  
+  if (web3) 
+  {
+     
+
+  if (this.state.hodl1balance !=0 ) {
+
+   try {
+
+    const tx = await contractService.approve(
+              web3,
+              );
+   
+    const txResult = await contractService.swaptoken(
+          web3
+          );
+
+  
+          await swalreact(
+            <div>
+                <h5 className='text-primary mb-4'>
+                  You Have Successfully Migrated
+                </h5>
+                <div>
+                  <h6 className='mb-0'>{this.state.hodl1balance} HODL 1.0</h6>
+                  <h6 className='my-4'>To</h6>
+                  <h6>{this.state.hodl1balance} HODL 2.0</h6>
+                  <div>
+                    <img
+                      height='60px'
+                      className='d-block mx-auto'
+                      src={HeroImage}
+                      alt='...'
+                    ></img>
+                  </div>
+                </div>
+              </div>
+        )
+  
+   window.location.reload();
+
+  }
+
+  catch
+  {   
+      swal("Transaction Failed!");
+      window.location.reload();
+  }
+
+
+  }
+  
+  else {
+
+    swal("No Tokens to Migrate!")
+
+  }
+
+
+   }
+   
+   else {
+    swal({
+      title: 'Change Network to Binance Mainet',
+      timer: 3000
+      })
+       }
+
+
+
+
+ }
+
+
+
+
+
+
+
 
   logoutUser = async () => {
     if (window.sessionStorage.getItem('walletName') == 'walletconnect') {
@@ -76,6 +183,7 @@ export class Migrate extends Component {
     window.sessionStorage.removeItem('walletName');
     window.location.reload();
   };
+
 
   requestAuth = async () => {
     try {
@@ -168,7 +276,7 @@ export class Migrate extends Component {
                   <>
                     <div>
                       {' '}
-                      <a
+                      <a onClick={this.swap}
                         className='cta-btn align-middle'
                         href='#'
                         data-toggle='modal'
@@ -185,12 +293,12 @@ export class Migrate extends Component {
               {!connected && ''}
               {connected && (
                 <div className='row justify-content-between'>
-                  <h6 style={{ color: 'white' }}>Wallet Addrress: 0X0..988A</h6>
+                  <h6 style={{ color: 'white' }}>Wallet Addrress: {window.sessionStorage.getItem('walletAddress').slice(0,10)}.....</h6>
 
-                  <h6 style={{ color: 'white' }}>HODL 1.0 Balance: 10281</h6>
+                  <h6 style={{ color: 'white' }}>HODL 1.0 Balance: {(this.state.hodl1balance).toFixed(0)}</h6>
 
                   <h6 style={{ color: 'white' }}>
-                    HODL 2.0 Balance: {this.state.hodl1balance}
+                    HODL 2.0 Balance: {(this.state.hodl2balance).toFixed(0)}
                   </h6>
                 </div>
               )}
@@ -350,40 +458,9 @@ export class Migrate extends Component {
             </div>
           </div>
 
-          <div
-            className='modal fade'
-            id='swapModal'
-            tabindex='3'
-            role='dialog'
-            aria-labelledby='swapModalTitle'
-            aria-hidden='true'
-          >
-            <div
-              className='modal-dialog modal-dialog-centered modal-connect'
-              role='document'
-            >
-              <div className='modal-content modal-content-custom'>
-                <div className='modal-body connect-body text-center'>
-                  <h5 className='text-primary mb-4'>
-                    You Have Successfully Migrated
-                  </h5>
-                  <div>
-                    <h6 className='mb-0'>128518 HODL 1.0</h6>
-                    <h6 className='my-4'>To</h6>
-                    <h6>128518 HODL 2.0</h6>
-                    <div>
-                      <img
-                        height='60px'
-                        className='d-block mx-auto'
-                        src={HeroImage}
-                        alt='...'
-                      ></img>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      
+       
+         
         </section>
       </div>
     );

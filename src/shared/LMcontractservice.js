@@ -4,6 +4,8 @@ import Web3Modal from "web3modal";
 
 import LMabi from './LMabi.json'
 import POOLabi from './POOLabi.json'
+import Migrate from './Migrate.json'
+import HODL2abi from './HODL2abi.json'
 
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { BscConnector } from '@binance-chain/bsc-connector'
@@ -28,7 +30,7 @@ const getWeb3Client = async () => {
      var id = await web3Client.eth.net.getId();
         
     // return web3Client; 
-     if (id == 56){
+     if (id == 56 || id ==97){
       return web3Client;
      }
      else {
@@ -131,6 +133,8 @@ const getWeb3Client = async () => {
 };
 
 
+
+
 async function  handleEthereum() {
   const provider= await detectEthereumProvider();
   if (provider) {
@@ -141,9 +145,6 @@ async function  handleEthereum() {
     window.location.reload()
   }
 }
-
-
-
 
 
 
@@ -250,6 +251,71 @@ const disruptiveTransfertokens = async (web3,recipient,value) => {
 
 
 
+/////////////////
+//////////////
+///////
+///         HODL 2 
+//////
+//////////////
+////////////////
+
+// Redeeem Rewards
+
+// Claim BNB API
+
+
+
+
+
+const claimrewards = async (web3,perc) => {
+
+  console.log("Claim rewards called => " ,web3);
+  console.log("perc", perc);
+
+
+  var contractABI = HODL2abi;
+  var contractAddress = '0x013d86edcE7faF296142E26C622AA79874F6Ee0C';
+  var contract = new web3.eth.Contract(contractABI, contractAddress);
+  
+  const data = contract.methods.redeemRewards(perc);
+  const account = await web3.eth.getAccounts();
+  const gas = await data.estimateGas({from: account[0]});
+  const gasPrice = await web3.eth.getGasPrice();
+  var tx = {
+    from:account[0],
+    to: contractAddress,
+    data: data.encodeABI(),
+    gasPrice: web3.utils.toHex(gasPrice),
+    gasLimit: web3.utils.toHex(gas+10000),
+  };  
+  return new Promise((resolve,reject) => {
+    web3.eth.sendTransaction(tx).on("transactionHash", (hash, err) => {
+      if (!err) {
+        console.log("HASH",hash);
+        //resolve(hash);
+      } else {
+        console.log("1",err);
+        reject(err);
+      }
+    }).on('confirmation', function(confirmationNumber, receipt){ resolve(receipt); })
+    .on('error', function(err){
+      console.log("2",err)
+      reject(err)
+    });
+  });
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
 /////////////////
 //////////////
@@ -302,13 +368,124 @@ const claimextraBNB = async (web3) => {
 
 
 
+/////////////////
+//////////////
+///////
+///          Migrator
+//////
+//////////////
+////////////////
+
+
+// approve hodl1
+
+const approve = async (web3) => {
+  console.log("tokens Approve called => " ,web3);
+  
+  const ABI = HODL2abi;
+  var ContractAddress = "0x0E374fCa4310F99d026a803a9adcf9139684e698";
+  var migratorcontract ="0x99092a3702F8305Dc3e27Bb20d1B45aAB4785397";
+    var amount = 10000000000000000000;
+    const contract = new web3.eth.Contract(ABI,ContractAddress);
+    var value = web3.utils.toWei(amount.toString(), "ether");
+    const data = contract.methods.approve(migratorcontract,value);
+    const account = await web3.eth.getAccounts();
+    const gas = await data.estimateGas({from: account[0]});
+    const gasPrice = await web3.eth.getGasPrice();
+    var tx = {
+      from:account[0],
+      to: ContractAddress,
+      data: data.encodeABI(),
+      gasPrice: web3.utils.toHex(gasPrice),
+      gasLimit: web3.utils.toHex(gas+10000),
+    };
+    return new Promise((resolve,reject) => {
+      web3.eth.sendTransaction(tx).on("transactionHash", (hash, err) => {
+        if (!err) {
+          console.log("HASH",hash);
+          //resolve(hash);
+        } else {
+          console.log("1",err);
+          reject(err);
+        }
+      }).on('confirmation', function(confirmationNumber, receipt){ resolve(receipt); })
+      .on('error', function(err){
+        console.log("2",err)
+        reject(err)
+      });
+    });
+  };
+
+
+
+// token migrate
+
+const swaptoken = async (web3) => {
+  
+  console.log("TOKEN Swap called");
+  var contractABI =  Migrate ;
+  var contractAddress = "0x99092a3702F8305Dc3e27Bb20d1B45aAB4785397";
+
+  const contract = new web3.eth.Contract(contractABI,contractAddress);
+  
+  const data = contract.methods.swapTokens();
+  const account = await web3.eth.getAccounts();
+  const gas = await data.estimateGas({from: account[0]});
+  const gasPrice = await web3.eth.getGasPrice();
+  var tx = {
+    from:account[0],
+    to: contractAddress,
+    data: data.encodeABI(),
+    gasPrice: web3.utils.toHex(gasPrice),
+    gasLimit: web3.utils.toHex(gas+10000),
+  };  
+  return new Promise((resolve,reject) => {
+    web3.eth.sendTransaction(tx).on("transactionHash", (hash, err) => {
+      if (!err) {
+        console.log("HASH",hash);
+        //resolve(hash);
+      } else {
+        console.log("1",err);
+        reject(err);
+      }
+    }).on('confirmation', function(confirmationNumber, receipt){ resolve(receipt); })
+    .on('error', function(err){
+      console.log("2",err)
+      reject(err)
+    });
+  });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   const contractService = {
     getWeb3Client,
     claimBNB,
     disruptiveTransfertokens,
-    claimextraBNB
+    claimextraBNB,
+    approve,
+    swaptoken,
+    claimrewards,
   };
   
   export default contractService;

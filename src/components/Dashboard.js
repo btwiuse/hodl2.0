@@ -15,8 +15,7 @@ import Icon4 from '../images/icons/4.png';
 import CoinGecko from 'coingecko-api';
 
 import Web3 from 'web3';
-import LMabi from '../shared/LMabi.json';
-import POOLabi from '../shared/POOLabi.json';
+import LMabi from '../shared/HODL2abi.json';
 import contractService from '../shared/LMcontractservice';
 
 import { Confirm } from 'react-st-modal';
@@ -49,30 +48,23 @@ function Dashboard() {
   const [yearly, setyearly] = useState(0);
   const [recover, setrecover] = useState(0);
   const [charityBnb, setcharityBnb] = useState(0);
+  const [totaldistributedBnb, settotaldistributedBnb] = useState(0);
+  const [userclaimBnb, setuserclaimBnb] = useState(0);
+  const [totalreinvested, settotalreinvested] = useState(0);
+  const [userreinvested, setuserreinvested] = useState(0);
+  const [rewardhardCap, setrewardhardCap] = useState(0);
 
-  // small investor BNB pool
-  const [extrabnbreward, setextrabnbreward] = useState(0);
-  const [TotalbnbinextrarewardPool, setTotalbnbinextrarewardPool] = useState(0);
-  const [startTime, setstartTime] = useState(0);
-  const [endTime, setendTime] = useState(0);
-  const [intervals, setIntervals] = useState(0);
-  const [multiplier, setmultiplier] = useState(0);
-  const [gasfees, setGasfees] = useState(0);
-  const [collectiontime, setcollectiontime] = useState(startTime);
-  const [campaignstatus, setcampaignstatus] = useState(false);
-  const [campaignid, setcampaignid] = useState(0);
-  const [feesnabled, setfeesenabled] = useState('Yes');
-  const [startbalance, setstartbalance] = useState(0);
-  const [endbalance, setendbalance] = useState(0);
+ 
+
 
   function web3apis() {
     let address = window.sessionStorage.getItem('walletAddress');
 
-    // const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
-    const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
+    const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
+    // const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
 
     var contractABI = LMabi;
-    var contractAddress = '0x0e3eaf83ea93abe756690c62c72284943b96a6bc';
+    var contractAddress = '0x013d86edcE7faF296142E26C622AA79874F6Ee0C';
     var contract = new web3.eth.Contract(contractABI, contractAddress);
 
     contract.methods
@@ -87,7 +79,7 @@ function Dashboard() {
 
     // get BNB balance of reward POOl
     web3.eth
-      .getBalance('0x0e3eaf83ea93abe756690c62c72284943b96a6bc')
+      .getBalance('0x013d86edcE7faF296142E26C622AA79874F6Ee0C')
       .then((balance) => {
         ////console.log(balance);
         var tokens = web3.utils.toBN(balance).toString();
@@ -116,15 +108,16 @@ function Dashboard() {
       },
     ];
     var wrappedBNBcontractAddress =
-      '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c';
+      '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd';
 
     var wrappedBNBcontract = new web3.eth.Contract(
       wrappednBNBABI,
       wrappedBNBcontractAddress
     );
 
+
     wrappedBNBcontract.methods
-      .balanceOf('0x2941273449ab4eb6fcdf8f84763f017fae264091')
+      .balanceOf('0x805396019B0Fff064584BFf4650eefA6B878812e')
       .call()
       .then((balance) => {
         var tokens = web3.utils.toBN(balance).toString();
@@ -135,7 +128,7 @@ function Dashboard() {
     // get LM token in LP
 
     contract.methods
-      .balanceOf('0x2941273449ab4eb6fcdf8f84763f017fae264091')
+      .balanceOf('0x805396019B0Fff064584BFf4650eefA6B878812e')
       .call()
       .then((balance) => {
         ////console.log(balance);
@@ -143,6 +136,7 @@ function Dashboard() {
         var tokens = web3.utils.toWei(gwei, 'Gwei');
         setLMbalanceLPpool(web3.utils.fromWei(tokens, 'ether'));
       });
+
 
     //  circulating Supply LM token
     contract.methods
@@ -158,6 +152,7 @@ function Dashboard() {
         setcirculatingSupply(csupply);
       });
 
+
     // fetch latest 1 BNB price
     const CoinGeckoClient = new CoinGecko();
     // fetch price of 1 BNB
@@ -169,6 +164,7 @@ function Dashboard() {
       .then((data) => {
         setoneBNBprice(data.data.binancecoin.usd);
       });
+
 
     // LM BALANCE user
     contract.methods
@@ -203,160 +199,64 @@ function Dashboard() {
         }
       });
 
-    //   console.log("lpbnb",LPbnb);
-    //   console.log("Lm",LMbalanceLPpool);
 
-    //   var pricep = ((( Number(1000000) * Number(LPbnb) ) / Number(LMbalanceLPpool)))/Number(1000000);
-    //   setonebnb(Number(1/pricep));
-  }
-
-  function web3apisBNBPool() {
-    let address = window.sessionStorage.getItem('walletAddress');
-
-    const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
-
-    var contractABIPool = POOLabi;
-    var contractAddressPool = '0xc892eda63D52cF680EE06882Dc4960BF24338740';
-    var contractPool = new web3.eth.Contract(
-      contractABIPool,
-      contractAddressPool
-    );
-
-    //// get total bnb of user which can be claimed
-    contractPool.methods
-      .getBNBrewardshare(address)
-      .call()
-      .then((balance) => {
-        //console.log("extrareward",balance);
-        var tokens = web3.utils.toBN(balance).toString();
-        setextrabnbreward(web3.utils.fromWei(tokens, 'ether'));
-      });
-
-    // get total BNB balance of reward POOL
-    web3.eth
-      .getBalance('0xc892eda63D52cF680EE06882Dc4960BF24338740')
-      .then((balance) => {
-        //console.log("pool",balance);
-        var tokens = web3.utils.toBN(balance).toString();
-        setTotalbnbinextrarewardPool(web3.utils.fromWei(tokens, 'ether'));
-      });
-
-    //// retrieve current campaignID
-    contractPool.methods
-      .campaignID()
-      .call()
-      .then((id) => {
-        //console.log("id",id)
-        setcampaignid(id);
-      });
-
-    //// get StartTime of the Campaign
-    contractPool.methods
-      .startcampaign()
-      .call()
-      .then((startTime) => {
-        //console.log("starttime ",startTime);
-
-        setstartTime(startTime);
-        setcollectiontime(startTime);
-      });
-
-    //// get StopTime of the Campaign
-    contractPool.methods
-      .stopcampaign()
-      .call()
-      .then((stopTime) => {
-        //console.log("stoptime ",stopTime);
-        setendTime(stopTime);
-      });
-
-    //// get current Interval of the Campaign
-    contractPool.methods
-      .rewardCycleBlock()
-      .call()
-      .then((cycle) => {
-        //console.log("cycle",cycle);
-        setIntervals(cycle);
-      });
-
-    //// get current multiplier
-    contractPool.methods
-      .multiplier()
-      .call()
-      .then((multiplier) => {
-        //console.log("multiplier",multiplier);
-
-        setmultiplier(multiplier);
-      });
-
-    //// get Current Fees
-    contractPool.methods
-      .fees()
+    // total claimed BNb
+    contract.methods
+      .totalClaimedBNB()
       .call()
       .then((amount) => {
-        //console.log("fees",amount);
-
+        ////console.log(amount);
         var tokens = web3.utils.toBN(amount).toString();
-        if (Number(tokens) > 0) {
-          setfeesenabled('Yes');
-        } else {
-          setfeesenabled('No');
-        }
-        setGasfees(web3.utils.fromWei(tokens, 'ether'));
+        settotaldistributedBnb(Number(web3.utils.fromWei(tokens, 'ether')));
       });
 
-    //// get next collectable Time
-
-    contractPool.methods
-      .nextClaimDate(address)
-      .call()
-      .then((time) => {
-        //console.log("nexttime",time);
-
-        if (Number(time) > 0) {
-          setcollectiontime(time);
-        }
-      });
-
-    //// get current Status of the Campaign
-    contractPool.methods
-      .checkCampaignStatus()
-      .call()
-      .then((value) => {
-        //console.log("status",value);
-        setcampaignstatus(value);
-      });
-
-    contractPool.methods
-      .endlimit()
+    // user claimed BNb
+    contract.methods
+      .userClaimedBNB(address)
       .call()
       .then((amount) => {
-        //  //console.log("bal",amount);
-        var gwei = web3.utils.toBN(amount).toString();
-        var tokens = web3.utils.toWei(gwei, 'Gwei');
-        setendbalance(web3.utils.fromWei(tokens, 'ether'));
-        //console.log("endlimit", tokens);
+        ////console.log(amount);
+        var tokens = web3.utils.toBN(amount).toString();
+        setuserclaimBnb(Number(web3.utils.fromWei(tokens, 'ether')));
       });
 
-    contractPool.methods
-      .startlimit()
+    // total reinvested bnb
+    contract.methods
+      .totalreinvested()
       .call()
       .then((amount) => {
-        // //console.log(amount);
+        ////console.log(amount);
         var gwei = web3.utils.toBN(amount).toString();
         var tokens = web3.utils.toWei(gwei, 'Gwei');
-        setstartbalance(web3.utils.fromWei(tokens, 'ether'));
-        //console.log("startlimit", tokens);
+        settotalreinvested(Number(web3.utils.fromWei(tokens, 'ether')));
       });
 
-    //    //// get user total earning
-    //     contractPool.methods.userearning(address).call().then(balance => {
+    // user reinvested
+    contract.methods
+      .userreinvested(address)
+      .call()
+      .then((amount) => {
+        ////console.log(amount);
+        var gwei = web3.utils.toBN(amount).toString();
+        var tokens = web3.utils.toWei(gwei, 'Gwei');
+        setuserreinvested(Number(web3.utils.fromWei(tokens, 'ether')));
+      });
 
-    //         var tokens = web3.utils.toBN(balance).toString();
-    //         setextrabnbreward( web3.utils.fromWei(tokens, 'ether'))
+    // get reward Hard CAP limit
+    contract.methods
+      .rewardHardcap()
+      .call()
+      .then((balance) => {
+        ////console.log(balance);
+        var tokens = web3.utils.toBN(balance).toString();
+        setrewardhardCap(Number(web3.utils.fromWei(tokens, 'ether')));
+      });
 
-    //     })
+
+
+    
   }
+
 
   async function submitform() {
     ////console.log(address);
@@ -405,14 +305,23 @@ function Dashboard() {
   }
 
   async function claim() {
+  
+   console.log("claim called")
+
     var bnb = Number(bnbreward);
+   
+
+
     // var bnb = a.toFixed(4);
     const web3 = await contractService.getWeb3Client();
 
+    console.log("claim calleds")
+
+       
     if (web3) {
       try {
-        setpreviousbnbreward(bnbreward);
-        const txResult = await contractService.claimBNB(web3);
+        
+        const txResult = await contractService.claimrewards(web3,valueSlider);
 
         const txHash = txResult;
         ////console.log("Tx Placed => ", txHash);
@@ -430,42 +339,16 @@ function Dashboard() {
             <br></br>
             <h5>You have Successfully Claimed</h5>
 
-            <h5> BNB {bnb.toFixed(4)}</h5>
+            
+            <h5> BNB {valueSlider}%</h5>
+               
+             <h5> And </h5> 
 
-            {bnb >= 1 && (
-              <>
-                <h6>
-                  {' '}
-                  Wallet: {(bnb * 0.8).toFixed(2)} | Charities:{' '}
-                  {(bnb - bnb * 0.8).toFixed(2)}{' '}
-                </h6>
-                <h6> Congratulations on Contributing Towards Charity !</h6>
-              </>
-            )}
+            <h5> Re-Ivested Rewards {100 - Number(valueSlider)}%</h5>  
+
 
             <br></br>
-            <p>
-              Next Collection Date:{' '}
-              {new Date(nextAvailableclaim * 1000).toLocaleString('en-US', {
-                weekday: 'long',
-              })}
-              ,{' '}
-              {new Date(nextAvailableclaim * 1000).toLocaleString('en-US', {
-                month: 'long',
-              })}{' '}
-              {new Date(nextAvailableclaim * 1000).toLocaleString('en-US', {
-                day: 'numeric',
-              })}
-              ,{' '}
-              {new Date(nextAvailableclaim * 1000).toLocaleString('en-US', {
-                year: 'numeric',
-              })}{' '}
-              {new Date(nextAvailableclaim * 1000).toLocaleString('en-US', {
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true,
-              })}
-            </p>
+      
             <p>Support Us By Sharing Now !!</p>
             <br></br>
             <br></br>
@@ -476,9 +359,11 @@ function Dashboard() {
         setTimeout(() => {
           window.location.reload();
         }, 10);
-      } catch {
+
+      } 
+      catch {
         swal('Transaction Failed!');
-        // window.location.reload()
+       
       }
     } else {
       swal({
@@ -488,92 +373,10 @@ function Dashboard() {
     }
   }
 
-  async function claimextraBNB() {
-    var bnb = Number(extrabnbreward);
-    // var bnb = a.toFixed(4);
-    const web3 = await contractService.getWeb3Client();
-
-    if (web3) {
-      try {
-        // setpreviousbnbreward(bnbreward);
-        const txResult = await contractService.claimextraBNB(web3);
-
-        const txHash = txResult;
-        ////console.log()("Tx Placed => ", txHash);
-
-        //Save transaction 2
-        const txDetails = {
-          value: value,
-          txHash: txHash,
-          transactionType: 'Claim Rewards',
-        };
-
-        await swalreact(
-          <div>
-            <h3>Awesomeness !!</h3>
-            <br></br>
-            <h5>You have Successfully Claimed</h5>
-
-            <h5> BNB {bnb.toFixed(4)}</h5>
-
-            <br></br>
-            <p>
-              Next Collection Date:{' '}
-              {new Date(nextAvailableclaim * 1000).toLocaleString('en-US', {
-                weekday: 'long',
-              })}
-              ,{' '}
-              {new Date(nextAvailableclaim * 1000).toLocaleString('en-US', {
-                month: 'long',
-              })}{' '}
-              {new Date(nextAvailableclaim * 1000).toLocaleString('en-US', {
-                day: 'numeric',
-              })}
-              ,{' '}
-              {new Date(nextAvailableclaim * 1000).toLocaleString('en-US', {
-                year: 'numeric',
-              })}{' '}
-              {new Date(nextAvailableclaim * 1000).toLocaleString('en-US', {
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true,
-              })}
-            </p>
-            <p>Support Us By Sharing Now !!</p>
-            <br></br>
-            <br></br>
-            <img src={logo} alt='' className='img-fluid photo' />
-          </div>
-        );
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 100);
-      } catch {
-        swal('Transaction Failed!');
-        // window.location.reload()
-      }
-    } else {
-      swal({
-        title: 'Change Network to Binance Mainet',
-        timer: 3000,
-      });
-    }
-  }
-
-  // formatValue = value => `$ ${new Intl.NumberFormat().format(value)}`;
-  //   formatNormalValue = value => `$ ${value.toFixed(8)}`;
-  //   formatBNB = value => `BNB ${new Intl.NumberFormat().format(value)}`;
-
-  //   function formatValue(value) {
-
-  //     `$ ${new Intl.NumberFormat().format(value)}`;
-
-  //   }
-
+ 
   async function buylink() {
     var link =
-      'https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x0E3EAF83Ea93Abe756690C62c72284943b96a6Bc';
+      'https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x013d86edcE7faF296142E26C622AA79874F6Ee0C';
 
     // swal ({ title:"Buy tokens to earn rewards",
     // content: link ,
@@ -595,21 +398,17 @@ function Dashboard() {
     );
   }
 
+
   useEffect(() => {
     web3apis();
     const interval = setInterval(web3apis, 10000);
 
-    web3apisBNBPool();
-    const intervalnew = setInterval(web3apisBNBPool, 30000);
-
-    console.log('lpbnb', LPbnb);
-    console.log('Lm', LMbalanceLPpool);
-
     Functions();
     $('#auto_modal').modal('show');
 
-    return () => clearInterval(interval, intervalnew);
+    return () => clearInterval(interval);
   }, []);
+
 
   async function setValues(a) {
     var pricep =
@@ -781,7 +580,7 @@ function Dashboard() {
                   </div>
                   <div class='button_cacla'>
                     <a
-                      href='https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x0E3EAF83Ea93Abe756690C62c72284943b96a6Bc'
+                      href='https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x013d86edcE7faF296142E26C622AA79874F6Ee0C'
                       target='_blank'
                       class='btn-get-started scrollto'
                     >
@@ -804,10 +603,8 @@ function Dashboard() {
       </section>
 
       <main id='main'>
-        {!(
-          Number(LMBalanceuser) <= Number(endbalance) &&
-          Number(LMBalanceuser) >= Number(startbalance)
-        ) && (
+    
+
           <section
             id='services'
             className='services section-bg section_feature dashboard_page mb-0 pb-0 pt-2'
@@ -1060,159 +857,12 @@ function Dashboard() {
               </div>
             </div>
           </section>
-        )}
+      
 
-        {Number(LMBalanceuser) <= Number(endbalance) &&
-          Number(LMBalanceuser) >= Number(startbalance) && (
-            <section class='bonus_rewards '>
-              <div class='section-title'>
-                <h2>SMALL INVESTOR REWARDS</h2>
-                <div>
-                  {/* <h5>Total Reward Pool: {Number(TotalbnbinextrarewardPool).toFixed(2)}</h5> */}
-                  <h5>
-                    Your Reward Share:{' '}
-                    {Number((bnbreward / TotalbnbinrewardPool) * 100).toFixed(
-                      2
-                    )}{' '}
-                    %{' '}
-                  </h5>
-                  {/* <h5>Your Reward Share: {Number(extrabnbreward/TotalbnbinextrarewardPool*100).toFixed(2)} % </h5> */}
-                </div>
+ 
 
-                {/* My BNB {extrabnbreward} */}
-              </div>
-              <div class='container bonusreswards'>
-                <div class='row'>
-                  <div class='col-md-6'>
-                    <div class='rewars_bonus'>
-                      {/* <h5>Start Time: {new Date(startTime* 1000).toLocaleString("en-US",{month: "long"})} {new Date(startTime* 1000).toLocaleString("en-US",{day: "numeric"})}, {new Date(startTime* 1000).toLocaleString("en-US",{year: "numeric"})}  {new Date(startTime * 1000).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</h5> */}
-                      {/* <h5>End Time: {new Date(endTime* 1000).toLocaleString("en-US",{month: "long"})} {new Date(endTime* 1000).toLocaleString("en-US",{day: "numeric"})}, {new Date(endTime* 1000).toLocaleString("en-US",{year: "numeric"})}  {new Date(endTime * 1000).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</h5> */}
-                      {/* <h5>Interval: Every {Number(intervals)/60} Mins</h5> */}
-                      <h5 style={{ fontSize: '1.00rem' }}>
-                        Reward Multiplier: x{multiplier}
-                      </h5>
-                      <h5 style={{ fontSize: '1.00rem' }}>
-                        Free Gas Fee: {feesnabled}{' '}
-                      </h5>
-                      {/* <h5> CampaignID: {campaignid}</h5> */}
-                      <h5 style={{ fontSize: '1.00rem' }}>
-                        {' '}
-                        Minimum Balance:{' '}
-                        {new Intl.NumberFormat().format(startbalance)}
-                      </h5>
-                      <h5 style={{ fontSize: '1.00rem' }}>
-                        {' '}
-                        Maximum Balance:{' '}
-                        {new Intl.NumberFormat().format(endbalance)}
-                      </h5>
 
-                      <h5 style={{ fontSize: '1.00rem' }}>
-                        Next Collection Time:{' '}
-                        {new Date(collectiontime * 1000).toLocaleString(
-                          'en-US',
-                          { month: 'long' }
-                        )}{' '}
-                        {new Date(collectiontime * 1000).toLocaleString(
-                          'en-US',
-                          { day: 'numeric' }
-                        )}
-                        ,{' '}
-                        {new Date(collectiontime * 1000).toLocaleString(
-                          'en-US',
-                          { year: 'numeric' }
-                        )}{' '}
-                        {new Date(collectiontime * 1000).toLocaleString(
-                          'en-US',
-                          { hour: 'numeric', minute: 'numeric', hour12: true }
-                        )}{' '}
-                      </h5>
-                    </div>
-                  </div>
 
-                  <div class='col-md-6'>
-                    <div class='rewars_bonus'>
-                      <h5 style={{ fontSize: '1.00rem' }}>
-                        Reward Pool:{' '}
-                        {Number(TotalbnbinextrarewardPool).toFixed(2)} BNB
-                      </h5>
-                      <h5 style={{ fontSize: '1.00rem' }}>
-                        My Collectable BNB: {Number(extrabnbreward).toFixed(5)}{' '}
-                        BNB{' '}
-                      </h5>
-
-                      <br></br>
-
-                      {collectiontime < Math.round(Date.now() / 1000) ||
-                      collectiontime == Number(0) ? (
-                        <a
-                          onClick={claimextraBNB}
-                          class='reward_button '
-                          data-toggle='modal'
-                          data-target='#RewardsButton'
-                        >
-                          Claim BNB
-                        </a>
-                      ) : (
-                        <a
-                          onClick={() => {
-                            swalreact(
-                              <div>
-                                <h5>
-                                  "Please wait till your collectible date is
-                                  reached"
-                                </h5>
-                                <p>
-                                  Your Collectible Date is{' '}
-                                  {new Date(
-                                    collectiontime * 1000
-                                  ).toLocaleString('en-US', {
-                                    weekday: 'long',
-                                  })}
-                                  ,{' '}
-                                  {new Date(
-                                    collectiontime * 1000
-                                  ).toLocaleString('en-US', {
-                                    month: 'long',
-                                  })}{' '}
-                                  {new Date(
-                                    collectiontime * 1000
-                                  ).toLocaleString('en-US', { day: 'numeric' })}
-                                  ,{' '}
-                                  {new Date(
-                                    collectiontime * 1000
-                                  ).toLocaleString('en-US', {
-                                    year: 'numeric',
-                                  })}{' '}
-                                  {new Date(
-                                    collectiontime * 1000
-                                  ).toLocaleString('en-US', {
-                                    hour: 'numeric',
-                                    minute: 'numeric',
-                                    hour12: true,
-                                  })}
-                                </p>
-                              </div>
-                            );
-                          }}
-                          class='reward_button '
-                          data-toggle='modal'
-                          data-target='#RewardsButton'
-                        >
-                          Claim BNB
-                        </a>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* <div class="col-md-12">
-<div class="rewars_bonus">
-<h5>Collection Time:</h5>
-</div>
-</div> */}
-                </div>
-              </div>
-            </section>
-          )}
 
         <section className='services section-bg section_feature dashboard_page mb-0 pb-0 pt-2'>
           <div className='container' data-aos='fade-up'>
@@ -1235,9 +885,9 @@ function Dashboard() {
                     />
                   </div>
                   <h6>My Collectable Rewards</h6>
-                  {/* <p>
-                    $HODL {new Intl.NumberFormat().format(maxTransactionAmount)}{' '}
-                  </p> */}
+                  <p>
+                  {Number(bnbreward).toFixed(5)} BNB{' '}
+                  </p>
                 </div>
               </div>
               <div
@@ -1255,9 +905,33 @@ function Dashboard() {
                     />
                   </div>
                   <h6>Next Collection Date</h6>
-                  {/* <p>
-                    $HODL {new Intl.NumberFormat().format(maxTransactionAmount)}{' '}
-                  </p> */}
+                 <p>   {new Date(
+                                    nextAvailableclaim * 1000
+                                  ).toLocaleString('en-US', {
+                                    weekday: 'long',
+                                  })}
+                                  ,{' '}
+                                  {new Date(
+                                    nextAvailableclaim * 1000
+                                  ).toLocaleString('en-US', {
+                                    month: 'long',
+                                  })}{' '}
+                                  {new Date(
+                                    nextAvailableclaim * 1000
+                                  ).toLocaleString('en-US', { day: 'numeric' })}
+                                  ,{' '}
+                                  {new Date(
+                                    nextAvailableclaim * 1000
+                                  ).toLocaleString('en-US', {
+                                    year: 'numeric',
+                                  })}{' '}
+                                  {new Date(
+                                    nextAvailableclaim * 1000
+                                  ).toLocaleString('en-US', {
+                                    hour: 'numeric',
+                                    minute: 'numeric',
+                                    hour12: true,
+                                  })}      </p>     
                 </div>
               </div>
               <div
@@ -1275,9 +949,9 @@ function Dashboard() {
                     />
                   </div>
                   <h6>BNB Collected Till Date on 2.0</h6>
-                  {/* <p>
-                    $HODL {new Intl.NumberFormat().format(maxTransactionAmount)}{' '}
-                  </p> */}
+                  <p>
+                  {userclaimBnb.toFixed(2)}
+                  </p> 
                 </div>
               </div>
               <div
@@ -1295,9 +969,9 @@ function Dashboard() {
                     />
                   </div>
                   <h6>HODL Re-Invested Till Date on 2.0</h6>
-                  {/* <p>
-                    $HODL {new Intl.NumberFormat().format(maxTransactionAmount)}{' '}
-                  </p> */}
+                   <p>
+                   {userreinvested.toFixed(0)}
+                  </p> 
                 </div>
               </div>
               <div
@@ -1315,14 +989,16 @@ function Dashboard() {
                     />
                   </div>
                   <h6>Your HODL Balance</h6>
-                  {/* <p>
-                    $HODL {new Intl.NumberFormat().format(maxTransactionAmount)}{' '}
-                  </p> */}
+                   <p>
+                    $HODL {new Intl.NumberFormat().format(LMBalanceuser)}
+                  </p> 
                 </div>
               </div>
             </div>
           </div>
         </section>
+
+
 
         <section
           id='services'
