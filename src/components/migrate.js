@@ -2,10 +2,14 @@ import logo from '../images/logo.png';
 import React, { Component } from 'react';
 import Web3 from 'web3';
 import LMabi from '../shared/LMabi.json';
+import Migrateabi from '../shared/Migrate.json';
+
 import contractService from '../shared/LMcontractservice';
 
-import HeroImage from '../images/hero-img.png';
 
+import HeroImage from '../images/hero-img.png';
+import Hodl2Image from '../images/hodl2dashboardlogo.jpeg'
+ 
 import Metamask from '../images/MetaMask.png';
 import TrustWallet from '../images/trust.png';
 import Safepal from '../images/safepal.jpg';
@@ -29,6 +33,7 @@ export class Migrate extends Component {
       address: '',
       hodl1balance: 0,
       hodl2balance: 0,
+      swapped:false,
     };
   }
 
@@ -46,7 +51,10 @@ export class Migrate extends Component {
 
     var contractAddress2 = '0x013d86edcE7faF296142E26C622AA79874F6Ee0C';
     var contract2 = new web3.eth.Contract(contractABI, contractAddress2);
-
+  
+    var migratoraddress = '0x99092a3702F8305Dc3e27Bb20d1B45aAB4785397';
+    var migrateabi = Migrateabi; 
+    var migratecontract = new web3.eth.Contract(migrateabi, migratoraddress);
 
     if (address) {
       // HODL1 BALANCE user
@@ -71,7 +79,12 @@ export class Migrate extends Component {
           this.setState({ hodl2balance: Number(web3.utils.fromWei(tokens, 'ether')) });
         });
 
+       // swapped or not
+       migratecontract.methods.blacklist(address).call().then((value) => {
 
+         this.setState({swapped:value});
+
+      })
 
     }
   }
@@ -112,7 +125,7 @@ export class Migrate extends Component {
                     <img
                       height='60px'
                       className='d-block mx-auto'
-                      src={HeroImage}
+                      src={Hodl2Image}
                       alt='...'
                     ></img>
                   </div>
@@ -274,7 +287,7 @@ export class Migrate extends Component {
                 )}
                 {connected && (
                   <>
-                    <div>
+          { !this.state.swapped    &&    <div>
                       {' '}
                       <a onClick={this.swap}
                         className='cta-btn align-middle'
@@ -282,9 +295,15 @@ export class Migrate extends Component {
                         data-toggle='modal'
                         data-target='#swapModal'
                       >
-                        Swap Now
+                       Swap Now
                       </a>
-                    </div>
+                    </div>     }
+
+          { this.state.swapped    &&    <div>
+        
+           <a href="https://twitter.com/TokenHodl" className='cta-btn align-middle' target="_blank">Connect with us</a>
+             </div>     }
+
                   </>
                 )}
               </div>

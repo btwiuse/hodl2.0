@@ -4,7 +4,11 @@ import RangeSlider from 'react-bootstrap-range-slider';
 
 import $ from 'jquery';
 import logo from '../images/logo.png';
+
 import HeroImage from '../images/hero-img.png';
+import Hodl2Image from '../images/hodl2dashboardlogo.jpeg'
+import BNBImage from '../images/bnbimage.jpeg'
+
 import Icon3 from '../images/icons/3.png';
 import Icon8 from '../images/icons/8.png';
 import Icon1 from '../images/icons/1.png';
@@ -352,7 +356,7 @@ function Dashboard() {
             <p>Support Us By Sharing Now !!</p>
             <br></br>
             <br></br>
-            <img src={logo} alt='' className='img-fluid photo' />
+            <img src={Hodl2Image} alt='' className='img-fluid photo' />
           </div>
         );
 
@@ -679,12 +683,12 @@ function Dashboard() {
                       <div className='mr-2 d-flex align-items-center'>
                         <h5 className='mb-0 mr-2'>BNB Reward</h5>
                         <div>
-                          <img height={40} className='w-auto' src={HeroImage} />
+                          <img height={40} className='w-auto' src={BNBImage} />
                         </div>
                       </div>
                       <div className='ml-auto d-flex align-items-center'>
                         <div>
-                          <img height={40} className='w-auto' src={HeroImage} />
+                          <img height={40} className='w-auto' src={Hodl2Image} />
                         </div>
                         <h5 className='mb-0 ml-2'>ReInvest</h5>
                       </div>
