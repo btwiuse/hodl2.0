@@ -121,7 +121,7 @@ function Dashboard() {
 
 
     wrappedBNBcontract.methods
-      .balanceOf('0x8c5783144811f868165B207eC86084C9f1BB991C')
+      .balanceOf('0x78e1A6295A2Da2f6efc331997f7a059c43B75712')
       .call()
       .then((balance) => {
         var tokens = web3.utils.toBN(balance).toString();
@@ -132,7 +132,7 @@ function Dashboard() {
     // get LM token in LP
 
     contract.methods
-      .balanceOf('0x8c5783144811f868165B207eC86084C9f1BB991C')
+      .balanceOf('0x78e1A6295A2Da2f6efc331997f7a059c43B75712')
       .call()
       .then((balance) => {
         ////console.log(balance);
