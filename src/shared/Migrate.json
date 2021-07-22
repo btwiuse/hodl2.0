@@ -51,6 +51,19 @@
 	},
 	{
 		"inputs": [],
+		"name": "deadAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "hodlv1",
 		"outputs": [
 			{

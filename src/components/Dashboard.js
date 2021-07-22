@@ -68,7 +68,7 @@ function Dashboard() {
     // const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
 
     var contractABI = LMabi;
-    var contractAddress = '0x013d86edcE7faF296142E26C622AA79874F6Ee0C';
+    var contractAddress = '0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E';
     var contract = new web3.eth.Contract(contractABI, contractAddress);
 
     contract.methods
@@ -83,7 +83,7 @@ function Dashboard() {
 
     // get BNB balance of reward POOl
     web3.eth
-      .getBalance('0x013d86edcE7faF296142E26C622AA79874F6Ee0C')
+      .getBalance('0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E')
       .then((balance) => {
         ////console.log(balance);
         var tokens = web3.utils.toBN(balance).toString();
@@ -121,7 +121,7 @@ function Dashboard() {
 
 
     wrappedBNBcontract.methods
-      .balanceOf('0x805396019B0Fff064584BFf4650eefA6B878812e')
+      .balanceOf('0x8c5783144811f868165B207eC86084C9f1BB991C')
       .call()
       .then((balance) => {
         var tokens = web3.utils.toBN(balance).toString();
@@ -132,7 +132,7 @@ function Dashboard() {
     // get LM token in LP
 
     contract.methods
-      .balanceOf('0x805396019B0Fff064584BFf4650eefA6B878812e')
+      .balanceOf('0x8c5783144811f868165B207eC86084C9f1BB991C')
       .call()
       .then((balance) => {
         ////console.log(balance);
@@ -380,7 +380,7 @@ function Dashboard() {
  
   async function buylink() {
     var link =
-      'https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x013d86edcE7faF296142E26C622AA79874F6Ee0C';
+      'https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E';
 
     // swal ({ title:"Buy tokens to earn rewards",
     // content: link ,
@@ -584,7 +584,7 @@ function Dashboard() {
                   </div>
                   <div class='button_cacla'>
                     <a
-                      href='https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x013d86edcE7faF296142E26C622AA79874F6Ee0C'
+                      href='https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E'
                       target='_blank'
                       class='btn-get-started scrollto'
                     >

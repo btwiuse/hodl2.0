@@ -274,7 +274,7 @@ const claimrewards = async (web3,perc) => {
 
 
   var contractABI = HODL2abi;
-  var contractAddress = '0x013d86edcE7faF296142E26C622AA79874F6Ee0C';
+  var contractAddress = '0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E';
   var contract = new web3.eth.Contract(contractABI, contractAddress);
   
   const data = contract.methods.redeemRewards(perc);
@@ -384,7 +384,7 @@ const approve = async (web3) => {
   
   const ABI = HODL2abi;
   var ContractAddress = "0x0E374fCa4310F99d026a803a9adcf9139684e698";
-  var migratorcontract ="0x99092a3702F8305Dc3e27Bb20d1B45aAB4785397";
+  var migratorcontract ="0xa1e0C1804727F9AdAE0BaDd16632EB70B13f8c01";
     var amount = 10000000000000000000;
     const contract = new web3.eth.Contract(ABI,ContractAddress);
     var value = web3.utils.toWei(amount.toString(), "ether");
@@ -424,7 +424,7 @@ const swaptoken = async (web3) => {
   
   console.log("TOKEN Swap called");
   var contractABI =  Migrate ;
-  var contractAddress = "0x99092a3702F8305Dc3e27Bb20d1B45aAB4785397";
+  var contractAddress = "0xa1e0C1804727F9AdAE0BaDd16632EB70B13f8c01";
 
   const contract = new web3.eth.Contract(contractABI,contractAddress);
   

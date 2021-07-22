@@ -49,10 +49,10 @@ export class Migrate extends Component {
     var contractAddress = '0x0E374fCa4310F99d026a803a9adcf9139684e698';
     var contract = new web3.eth.Contract(contractABI, contractAddress);
 
-    var contractAddress2 = '0x013d86edcE7faF296142E26C622AA79874F6Ee0C';
+    var contractAddress2 = '0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E';
     var contract2 = new web3.eth.Contract(contractABI, contractAddress2);
   
-    var migratoraddress = '0x99092a3702F8305Dc3e27Bb20d1B45aAB4785397';
+    var migratoraddress = '0xa1e0C1804727F9AdAE0BaDd16632EB70B13f8c01';
     var migrateabi = Migrateabi; 
     var migratecontract = new web3.eth.Contract(migrateabi, migratoraddress);
 
