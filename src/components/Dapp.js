@@ -36,13 +36,13 @@ export class Dapp extends Component {
     //   const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
   
         var contractABI = LMabi;
-        var contractAddress ="0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E";
+        var contractAddress ="0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C";
         var contract = new web3.eth.Contract(contractABI,contractAddress);
    
      if (address){
          
           // get BNB balance of reward POOl  
-       web3.eth.getBalance("0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E")
+       web3.eth.getBalance("0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C")
        .then(balance => {
            //console.log(balance);
            var tokens = web3.utils.toBN(balance).toString();

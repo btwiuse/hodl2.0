@@ -68,7 +68,7 @@ function Dashboard() {
     // const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
 
     var contractABI = LMabi;
-    var contractAddress = '0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E';
+    var contractAddress = '0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C';
     var contract = new web3.eth.Contract(contractABI, contractAddress);
 
     contract.methods
@@ -83,7 +83,7 @@ function Dashboard() {
 
     // get BNB balance of reward POOl
     web3.eth
-      .getBalance('0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E')
+      .getBalance('0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C')
       .then((balance) => {
         ////console.log(balance);
         var tokens = web3.utils.toBN(balance).toString();
@@ -380,7 +380,7 @@ function Dashboard() {
  
   async function buylink() {
     var link =
-      'https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E';
+      'https://exchange.pancakeswap.finance/#/swap?outputCurrency=0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C';
 
     // swal ({ title:"Buy tokens to earn rewards",
     // content: link ,
@@ -584,7 +584,7 @@ function Dashboard() {
                   </div>
                   <div class='button_cacla'>
                     <a
-                      href='https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E'
+                      href='https://exchange.pancakeswap.finance/#/swap?outputCurrency=0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C'
                       target='_blank'
                       class='btn-get-started scrollto'
                     >
@@ -723,7 +723,7 @@ function Dashboard() {
                           onClick={claim}
                           className='COLLECTION_MONEY bubbly-button'
                         >
-                          Collect my BNB{' '}
+                          Collect Rewards{' '}
                         </a>
                       ) : !user &&
                         nextAvailableclaim - Math.round(Date.now() / 1000) >
@@ -800,7 +800,7 @@ function Dashboard() {
                           }}
                           className='COLLECTION_MONEY bubbly-button'
                         >
-                          Collect my BNB{' '}
+                          Collect Rewards{' '}
                         </a>
                       ) : !user &&
                         (nextAvailableclaim < Math.round(Date.now() / 1000) ||

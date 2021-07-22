@@ -46,13 +46,13 @@ export class Migrate extends Component {
     // const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
 
     var contractABI = LMabi;
-    var contractAddress = '0x0E374fCa4310F99d026a803a9adcf9139684e698';
+    var contractAddress = '0xA73C42d76af46cABfB8c1788Ad25CCAA5F9894e8';
     var contract = new web3.eth.Contract(contractABI, contractAddress);
 
-    var contractAddress2 = '0x64934CE8dAfca0408D8BDCB527988B996Eb9A41E';
+    var contractAddress2 = '0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C';
     var contract2 = new web3.eth.Contract(contractABI, contractAddress2);
   
-    var migratoraddress = '0xa1e0C1804727F9AdAE0BaDd16632EB70B13f8c01';
+    var migratoraddress = '0x653B05F10DDa78249BDb0733d519B070583b0C0d';
     var migrateabi = Migrateabi; 
     var migratecontract = new web3.eth.Contract(migrateabi, migratoraddress);
 
