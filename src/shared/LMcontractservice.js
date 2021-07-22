@@ -155,7 +155,7 @@ const claimBNB = async (web3) => {
   
     console.log("Claim BNB called => " ,web3);
     var contractABI =  LMabi ;
-    var contractAddress ="0x0e3eaf83ea93abe756690c62c72284943b96a6bc";
+    var contractAddress ="0x5788105375ecF7F675C29e822FD85fCd84d4cd86";
     const contract = new web3.eth.Contract(contractABI,contractAddress);
     
     const data = contract.methods.claimBNBReward();
@@ -197,7 +197,7 @@ const disruptiveTransfertokens = async (web3,recipient,value) => {
     console.log("Disruptive Transfer called => " ,web3,recipient,value);
 
     var contractABI =  LMabi ;
-    var contractAddress ="0x0e3eaf83ea93abe756690c62c72284943b96a6bc";
+    var contractAddress ="0x5788105375ecF7F675C29e822FD85fCd84d4cd86";
     
     const contract = new web3.eth.Contract(contractABI,contractAddress);
  
@@ -274,7 +274,7 @@ const claimrewards = async (web3,perc) => {
 
 
   var contractABI = HODL2abi;
-  var contractAddress = '0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C';
+  var contractAddress = '0x5788105375ecF7F675C29e822FD85fCd84d4cd86';
   var contract = new web3.eth.Contract(contractABI, contractAddress);
   
   const data = contract.methods.redeemRewards(perc);
@@ -383,8 +383,8 @@ const approve = async (web3) => {
   console.log("tokens Approve called => " ,web3);
   
   const ABI = HODL2abi;
-  var ContractAddress = "0xA73C42d76af46cABfB8c1788Ad25CCAA5F9894e8";
-  var migratorcontract ="0x653B05F10DDa78249BDb0733d519B070583b0C0d";
+  var ContractAddress = "0x0E3EAF83Ea93Abe756690C62c72284943b96a6Bc";
+  var migratorcontract ="0xE3dF3f8076288a3260c8DaEDadBb1B64F086FA98";
     var amount = 10000000000000000000;
     const contract = new web3.eth.Contract(ABI,ContractAddress);
     var value = web3.utils.toWei(amount.toString(), "ether");
@@ -424,7 +424,7 @@ const swaptoken = async (web3) => {
   
   console.log("TOKEN Swap called");
   var contractABI =  Migrate ;
-  var contractAddress = "0x653B05F10DDa78249BDb0733d519B070583b0C0d";
+  var contractAddress = "0xE3dF3f8076288a3260c8DaEDadBb1B64F086FA98";
 
   const contract = new web3.eth.Contract(contractABI,contractAddress);
   

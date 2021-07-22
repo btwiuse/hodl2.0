@@ -1,7 +1,7 @@
 import logo from '../images/logo.png'
 import React,{Component} from 'react'
 import Web3 from 'web3'
-import LMabi from '../shared/LMabi.json'
+import LMabi from '../shared/HODL2abi.json'
 import contractService from '../shared/LMcontractservice'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import DappHeader from './DappHeader'
@@ -28,21 +28,21 @@ export class Dapp extends Component {
 
   componentDidMount() { 
 
-     const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
+    //  const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
 
       let address = window.sessionStorage.getItem("walletAddress");
     //   const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
       
-    //   const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
+      const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
   
         var contractABI = LMabi;
-        var contractAddress ="0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C";
+        var contractAddress ="0x5788105375ecF7F675C29e822FD85fCd84d4cd86";
         var contract = new web3.eth.Contract(contractABI,contractAddress);
    
      if (address){
          
           // get BNB balance of reward POOl  
-       web3.eth.getBalance("0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C")
+       web3.eth.getBalance("0x5788105375ecF7F675C29e822FD85fCd84d4cd86")
        .then(balance => {
            //console.log(balance);
            var tokens = web3.utils.toBN(balance).toString();
@@ -129,7 +129,7 @@ export class Dapp extends Component {
                             <h5></h5>
                             <h6>Accumulating Wealth Was Never This Simple!</h6>
                             <br/>
-                            <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x0E3EAF83Ea93Abe756690C62c72284943b96a6Bc" className="btn-get-started scrollto dashboard" target="_blank">Buy $HODL 2.0</a>
+                            <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x5788105375ecF7F675C29e822FD85fCd84d4cd86" className="btn-get-started scrollto dashboard" target="_blank">Buy $HODL 2.0</a>
                         </div>
                     </div>
                 </div>

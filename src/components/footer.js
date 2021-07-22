@@ -23,14 +23,14 @@ function Footer() {
               <div className="col-lg-4 col-md-6 footer-links">
                 <h4>Important Links</h4>
                 <ul> 
-                <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x0E3EAF83Ea93Abe756690C62c72284943b96a6Bc" target="_blank">PancakeSwap</a></li>
+                <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x5788105375ecF7F675C29e822FD85fCd84d4cd86" target="_blank">PancakeSwap</a></li>
 
                 <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="#calc">Rewards Calculator</a></li>
 
                 <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://hodltoken.net/dashboard" target="_blank">dApp</a></li>
                
-               <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://app.unicrypt.network/amm/pancake-v2/pair/0x2941273449aB4eB6FCdf8f84763F017FaE264091"  target="_blank">Liquidity Locks</a></li>
-                  <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://bscscan.com/address/0x0e3eaf83ea93abe756690c62c72284943b96a6bc#code" target="_blank">Contract</a></li>
+               <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://app.unicrypt.network/amm/pancake-v2/pair/0x6D5023CBF2073eb4f0C78A59040826c8F2FDe050"  target="_blank">Liquidity Locks</a></li>
+                  <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://bscscan.com/address/0x5788105375ecF7F675C29e822FD85fCd84d4cd86#code" target="_blank">Contract</a></li>
                   <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://hodltoken.gitbook.io/hodl/" target="_blank">Documentation</a></li>
                   <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://github.com/hodltoken" target="_blank">Github</a></li>
                   
@@ -47,7 +47,7 @@ function Footer() {
        <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://coinmarketcap.com/currencies/hodl/" target="_blank">CoinMarketCap</a></li>
                   {/* <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://nomics.com/assets/hodl4-hodl-token" target="_blank">Nomics</a></li> */}
                   <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://www.livecoinwatch.com/price/HodlToken-___HODL" target="_blank">LiveCoinWatch</a></li>
-                  <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://poocoin.app/tokens/0x0e3eaf83ea93abe756690c62c72284943b96a6bc" target="_blank">PooCoin Chart</a></li>
+                  <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://poocoin.app/tokens/0x5788105375ecF7F675C29e822FD85fCd84d4cd86" target="_blank">PooCoin Chart</a></li>
                   {/* <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://www.coingecko.com/en/coins/hodl-token" target="_blank">Coingecko</a></li> */}
                   <li><box-icon type="regular" pull="right" name="chevron-right" color="#47b2e4"></box-icon> <a href="https://finance.yahoo.com/news/hodl-token-deflationary-community-centric-110500775.html" target="_blank">Yahoo Finance</a></li>
 

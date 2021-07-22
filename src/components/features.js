@@ -140,7 +140,7 @@ function Features() {
             <div className='icon-box p-0'>
               <div className='d-flex px-3 pt-2'>
                 <div className='ml-auto'>
-                  <span className='text-focus-in text-uppercase'>New</span>
+                  {/* <span className='text-focus-in text-uppercase'>New</span> */}
                 </div>
               </div>
               <div className='p-4'>
@@ -167,7 +167,7 @@ function Features() {
             <div className='icon-box p-0'>
               <div className='d-flex px-3 pt-2'>
                 <div className='ml-auto'>
-                  <span className='text-focus-in text-uppercase'>New</span>
+                  {/* <span className='text-focus-in text-uppercase'>New</span> */}
                 </div>
               </div>
               <div className='p-4'>
@@ -178,7 +178,7 @@ function Features() {
                   <a href=''>Automatic Liquidity Pool</a>
                 </h4>
                 <p>
-                  4% of every transaction contributes toward automatically
+                  2% of every transaction contributes toward automatically
                   generating further liquidity on Pancake Swap. Benefiting long
                   term for $HODL holders the most!
                 </p>
@@ -194,7 +194,7 @@ function Features() {
             <div className='icon-box p-0'>
               <div className='d-flex px-3 pt-2'>
                 <div className='ml-auto'>
-                  <span className='text-focus-in text-uppercase'>New</span>
+                  {/* <span className='text-focus-in text-uppercase'>New</span> */}
                 </div>
               </div>
               <div className='p-4'>
@@ -221,7 +221,7 @@ function Features() {
             <div className='icon-box p-0'>
               <div className='d-flex px-3 pt-2'>
                 <div className='ml-auto'>
-                  <span className='text-focus-in text-uppercase'>New</span>
+                  {/* <span className='text-focus-in text-uppercase'>New</span> */}
                 </div>
               </div>
               <div className='p-4'>
@@ -250,7 +250,7 @@ function Features() {
             <div className='icon-box p-0'>
               <div className='d-flex px-3 pt-2'>
                 <div className='ml-auto'>
-                  <span className='text-focus-in text-uppercase'>New</span>
+                  {/* <span className='text-focus-in text-uppercase'>New</span> */}
                 </div>
               </div>
               <div className='p-4'>

@@ -38,21 +38,21 @@ export class Migrate extends Component {
   }
 
   componentDidMount() {
-     const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
+    //  const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
 
     let address = window.sessionStorage.getItem('walletAddress');
     //   const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
 
-    // const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
+    const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
 
     var contractABI = LMabi;
-    var contractAddress = '0xA73C42d76af46cABfB8c1788Ad25CCAA5F9894e8';
+    var contractAddress = '0x0E3EAF83Ea93Abe756690C62c72284943b96a6Bc';
     var contract = new web3.eth.Contract(contractABI, contractAddress);
 
-    var contractAddress2 = '0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C';
+    var contractAddress2 = '0x5788105375ecF7F675C29e822FD85fCd84d4cd86';
     var contract2 = new web3.eth.Contract(contractABI, contractAddress2);
   
-    var migratoraddress = '0x653B05F10DDa78249BDb0733d519B070583b0C0d';
+    var migratoraddress = '0xE3dF3f8076288a3260c8DaEDadBb1B64F086FA98';
     var migrateabi = Migrateabi; 
     var migratecontract = new web3.eth.Contract(migrateabi, migratoraddress);
 

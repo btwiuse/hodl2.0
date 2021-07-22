@@ -36,10 +36,10 @@ function web3apis() {
     const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
 
     var contractABI = LMabi;
-    var contractAddress ="0x0e3eaf83ea93abe756690c62c72284943b96a6bc";
+    var contractAddress ="0x5788105375ecF7F675C29e822FD85fCd84d4cd86";
     var contract = new web3.eth.Contract(contractABI,contractAddress);
 
-    web3.eth.getBalance("0x0e3eaf83ea93abe756690c62c72284943b96a6bc")
+    web3.eth.getBalance("0x5788105375ecF7F675C29e822FD85fCd84d4cd86")
     .then(balance => {
         ////console.log(balance);
         var tokens = web3.utils.toBN(balance).toString();
@@ -52,7 +52,7 @@ function web3apis() {
   
   var wrappedBNBcontract = new web3.eth.Contract(wrappednBNBABI,wrappedBNBcontractAddress);   
   
-  wrappedBNBcontract.methods.balanceOf("0x2941273449ab4eb6fcdf8f84763f017fae264091").call().then(balance => {
+  wrappedBNBcontract.methods.balanceOf("0x6D5023CBF2073eb4f0C78A59040826c8F2FDe050").call().then(balance => {
       
       var tokens = web3.utils.toBN(balance).toString();
       setLPbnb( web3.utils.fromWei(tokens, 'ether'))
@@ -61,7 +61,7 @@ function web3apis() {
       )
 
 
-  contract.methods.balanceOf("0x2941273449ab4eb6fcdf8f84763f017fae264091").call().then(balance => {
+  contract.methods.balanceOf("0x6D5023CBF2073eb4f0C78A59040826c8F2FDe050").call().then(balance => {
     ////console.log(balance);
     var gwei = web3.utils.toBN(balance).toString();
     var tokens = web3.utils.toWei(gwei,"Gwei");
@@ -161,7 +161,7 @@ useEffect(()=>{
 
 <div class="button_cacla"> 
 
-<a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x0E3EAF83Ea93Abe756690C62c72284943b96a6Bc" class="btn-get-started scrollto" target="_blank">Buy $HODL</a>
+<a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x5788105375ecF7F675C29e822FD85fCd84d4cd86" class="btn-get-started scrollto" target="_blank">Buy $HODL</a>
 
 
 </div>

@@ -7,7 +7,7 @@ function Smart(){
             <div className="col-lg-4 text-center text-lg-left">
               <h3>Official Smart Contract</h3>
               <br />
-               <a className="cta-btn align-middle" href="https://bscscan.com/address/0x0e3eaf83ea93abe756690c62c72284943b96a6bc#code" target="_blank">Click Here!</a>
+               <a className="cta-btn align-middle" href="https://bscscan.com/address/0x5788105375ecF7F675C29e822FD85fCd84d4cd86#code" target="_blank">Click Here!</a>
   
             </div>
   
@@ -21,7 +21,7 @@ function Smart(){
             <div className="col-lg-4 text-center text-lg-left">
               <h3>Liquidity Locks</h3>
               <br />
-               <a className="cta-btn align-middle" href="https://app.unicrypt.network/amm/pancake-v2/pair/0x2941273449aB4eB6FCdf8f84763F017FaE264091" target="_blank">Click Here!</a>
+               <a className="cta-btn align-middle" href="https://app.unicrypt.network/amm/pancake-v2/pair/0x6D5023CBF2073eb4f0C78A59040826c8F2FDe050" target="_blank">Click Here!</a>
   
             </div>
   

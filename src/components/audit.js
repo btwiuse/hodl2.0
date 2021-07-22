@@ -16,7 +16,7 @@
 //             <h3 className="text-center">PooCoin Chart</h3>
          
 //           <div class="button_cacla"> 
-//                   <a href="https://poocoin.app/tokens/0x0e3eaf83ea93abe756690c62c72284943b96a6bc" class="btn-get-started scrollto reward_button123"target="_blank">Click Here!</a>
+//                   <a href="https://poocoin.app/tokens/0x5788105375ecF7F675C29e822FD85fCd84d4cd86" class="btn-get-started scrollto reward_button123"target="_blank">Click Here!</a>
 //                </div>
 //                </div>
 
@@ -44,7 +44,7 @@ function Audit(){
         <div className="col-lg-4 text-center text-lg-left burn">
             <h3>PooCoin Chart</h3>
             <br />
-             <a className="cta-btn align-middle" href="https://poocoin.app/tokens/0x0e3eaf83ea93abe756690c62c72284943b96a6bc" target="_blank">Click Here!</a>
+             <a className="cta-btn align-middle" href="https://poocoin.app/tokens/0x5788105375ecF7F675C29e822FD85fCd84d4cd86" target="_blank">Click Here!</a>
 
           </div>
 
@@ -61,7 +61,7 @@ function Audit(){
           <div className="col-lg-4 text-center text-lg-left">
             <h3>DexGuru Chart</h3>
             <br />
-             <a className="cta-btn align-middle" href="https://app.unicrypt.network/amm/pancake-v2/pair/0x2941273449aB4eB6FCdf8f84763F017FaE264091" target="_blank">Click Here!</a>
+             <a className="cta-btn align-middle" href="https://app.unicrypt.network/amm/pancake-v2/pair/0x6D5023CBF2073eb4f0C78A59040826c8F2FDe050" target="_blank">Click Here!</a>
 
           </div>
 

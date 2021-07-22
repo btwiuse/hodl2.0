@@ -29,7 +29,7 @@ import Functions from '../functions';
 import AnimatedNumber from 'animated-number-react';
 import swalreact from '@sweetalert/with-react';
 import Migrate from './migrate';
-
+ 
 function Dashboard() {
   const [valueSlider, setValueSlider] = useState(50);
   const [maxTransactionAmount, setmaxTransactionAmount] = useState(0);
@@ -62,13 +62,14 @@ function Dashboard() {
 
 
   function web3apis() {
+
     let address = window.sessionStorage.getItem('walletAddress');
 
-    const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
-    // const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
+    // const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
+    const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
 
     var contractABI = LMabi;
-    var contractAddress = '0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C';
+    var contractAddress = '0x5788105375ecF7F675C29e822FD85fCd84d4cd86';
     var contract = new web3.eth.Contract(contractABI, contractAddress);
 
     contract.methods
@@ -83,7 +84,7 @@ function Dashboard() {
 
     // get BNB balance of reward POOl
     web3.eth
-      .getBalance('0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C')
+      .getBalance('0x5788105375ecF7F675C29e822FD85fCd84d4cd86')
       .then((balance) => {
         ////console.log(balance);
         var tokens = web3.utils.toBN(balance).toString();
@@ -112,7 +113,7 @@ function Dashboard() {
       },
     ];
     var wrappedBNBcontractAddress =
-      '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd';
+      '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c';
 
     var wrappedBNBcontract = new web3.eth.Contract(
       wrappednBNBABI,
@@ -121,7 +122,7 @@ function Dashboard() {
 
 
     wrappedBNBcontract.methods
-      .balanceOf('0x78e1A6295A2Da2f6efc331997f7a059c43B75712')
+      .balanceOf('0x6D5023CBF2073eb4f0C78A59040826c8F2FDe050')
       .call()
       .then((balance) => {
         var tokens = web3.utils.toBN(balance).toString();
@@ -132,7 +133,7 @@ function Dashboard() {
     // get LM token in LP
 
     contract.methods
-      .balanceOf('0x78e1A6295A2Da2f6efc331997f7a059c43B75712')
+      .balanceOf('0x6D5023CBF2073eb4f0C78A59040826c8F2FDe050')
       .call()
       .then((balance) => {
         ////console.log(balance);
@@ -380,7 +381,7 @@ function Dashboard() {
  
   async function buylink() {
     var link =
-      'https://exchange.pancakeswap.finance/#/swap?outputCurrency=0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C';
+      'https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x5788105375ecF7F675C29e822FD85fCd84d4cd86';
 
     // swal ({ title:"Buy tokens to earn rewards",
     // content: link ,
@@ -584,7 +585,7 @@ function Dashboard() {
                   </div>
                   <div class='button_cacla'>
                     <a
-                      href='https://exchange.pancakeswap.finance/#/swap?outputCurrency=0xf0C07796cCa29DC79A0253233Ecb0Ef79b14880C'
+                      href='https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x5788105375ecF7F675C29e822FD85fCd84d4cd86'
                       target='_blank'
                       class='btn-get-started scrollto'
                     >
@@ -992,7 +993,7 @@ function Dashboard() {
                       alt='...'
                     />
                   </div>
-                  <h6>Your HODL Balance</h6>
+                  <h6>Your HODL 2.0 Balance </h6>
                    <p>
                     $HODL {new Intl.NumberFormat().format(LMBalanceuser)}
                   </p> 
